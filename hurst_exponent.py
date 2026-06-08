@@ -1,4 +1,6 @@
 import numpy as np
+from datetime import date
+import yfinance as yf
 
 def hurst_expo(price_series):
     returns=np.array(price_series)
@@ -28,8 +30,7 @@ def hurst_expo(price_series):
     h,x=np.polyfit(window,rsval,1)
     return h
 
-import yfinance as yf
-data=yf.download("RELIANCE.NS",start="2020-01-01",end="2026-06-01")
+data=yf.download("RELIANCE.NS",start="2020-01-01",end=date.today())
 prices=data['Close'].dropna().values
 
 h=hurst_expo(price_series=prices)
